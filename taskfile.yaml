@@ -47,6 +47,11 @@ tasks:
       - task: rust-cargo-build
       - task: python-build
         
+  make:
+    deps: [python-venv]
+    cmds:
+      - cmd: cmd.exe /D /C "call .venv\Scripts\activate.bat && make"
+
   python-venv:
     sources:
       - pyproject.toml
