@@ -44,32 +44,49 @@ tasks:
 
   build:
     cmds:
-      - task: build-cargo
-      - task: build-python
+      - task: rust-cargo-build
+      - task: python-build
         
-  build-python:
-    deps: [git-submodule-init]
+  python-venv:
+    sources:
+      - pyproject.toml
+    generates:
+      - ./.venv/rye-venv.json
+      - ./requirements.lock
+      - ./requirements-dev.lock
+    cmds:
+      - cmd: rye sync
+
+  python-build:
+    deps: [python-venv, git-submodule-init]
     aliases: [py-build, pyb, build-py]
     silent: true
     sources:
       - aw-*/**/pyproject.toml
       - aw-*/**/requirements*.lock
       - aw-*/**/*.py
+    generates:
+      - ./dist/activitywatch-*.tar.gz
     cmds:
-      - cmd: rye sync
       - cmd: rye build
 
-  build-cargo:
-    deps: [git-submodule-init]
+  rust-setup:
+    generates:
+      - ./target/taskfile-rust-upgrade.log
+    cmds: 
+      - cmd: rustup upgrade > ./target/taskfile-rust-upgrade.log
+
+  rust-cargo-build:
+    deps: [git-submodule-init, rust-setup]
     aliases: [rust-build, build-rs, cargo-bld]
     silent: true
     sources:
-      - aw-*/**/*.rs
-      - aw-*/**/Cargo.toml
-      - aw-*/**/Cargo.lock
+      - ./aw-*/**/*.rs
+      - ./aw-*/**/Cargo.toml
+      - ./aw-*/**/Cargo.lock
+    generates:
+      - ./target/.rustc_info.json
     cmds:
-      - cmd: rustup upgrade
-        ignore_error: true
       - cmd: cargo build
         
   deps-windows:
