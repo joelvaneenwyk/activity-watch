@@ -107,6 +107,7 @@ pefile==2023.2.7
     # via pyinstaller
 pexpect==4.9.0
     # via poetry
+pip==24.2
 pkginfo==1.11.1
     # via poetry
 platformdirs==4.2.2
@@ -165,7 +166,7 @@ setuptools==72.2.0
     # via pyinstaller-hooks-contrib
 shellingham==1.5.4
     # via poetry
-tomli==2.0.1 ; python_full_version <= '3.11.0a6' or python_version < '3.11'
+tomli==2.0.1
     # via build
     # via coverage
     # via mypy
