@@ -1,22 +1,29 @@
-build
-dist
-docs
-other
-old
+build/
+dist/
+docs/
+other/
+old/
 
 # Coverage
-*coverage*
-htmlcov
+*coverage*/
+htmlcov/
 
 # Editor/IDEs
-.idea
+.idea/
 *.swp
 
 # Python
-*venv*
-__pycache__
+*venv*/
+__pycache__/
 .python-version
 
 # Misc
-.*cache
+.*cache/
 .DS_Store
+
+.task/
+
+
+# Added by cargo
+
+/target
