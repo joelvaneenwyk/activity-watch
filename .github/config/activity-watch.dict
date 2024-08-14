@@ -39,7 +39,9 @@ pynput
 pytz
 pywin
 randr
+reimplementation
 restx
+rustc
 rustup
 setuptools
 shlex
