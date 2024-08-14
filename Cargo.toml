@@ -1,0 +1,11 @@
+[workspace]
+members = [
+    "aw-server-rust/aw-client-rust",
+    "aw-server-rust/aw-datastore",
+    "aw-server-rust/aw-models",
+    "aw-server-rust/aw-transform",
+    "aw-server-rust/aw-server",
+    "aw-server-rust/aw-sync",
+    "aw-server-rust/aw-query",
+]
+resolver = "2"
