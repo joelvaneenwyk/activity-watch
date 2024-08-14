@@ -1,0 +1,11 @@
+version: "0.2"
+ignorePaths: []
+dictionaryDefinitions:
+  - name: activity-watch
+    path: ./.github/config/activity-watch.dict
+    addWords: true
+dictionaries:
+  - activity-watch
+words: []
+ignoreWords: []
+import: []
