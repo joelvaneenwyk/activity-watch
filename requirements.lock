@@ -10,5 +10,5 @@
 #   universal: true
 
 -e file:.
-urllib3==2.2.2
+urllib3==1.26.19
     # via activitywatch

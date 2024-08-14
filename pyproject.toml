@@ -63,12 +63,14 @@ allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = [
-    "aw-core",
     "aw-client",
-    "aw-watcher-afk",
-    "aw-watcher-window",
-    "aw-server",
+    "aw-core",
+    "aw-notifyWhat do you want",
     "aw-qt",
+    "aw-server",
+    "aw-watcher-afk",
+    "aw-watcher-input",
+    "aw-watcher-window",
 ]
 
 [tool.hatch.build.targets.sdist]

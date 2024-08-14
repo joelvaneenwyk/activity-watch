@@ -40,6 +40,8 @@ distlib==0.3.8
     # via virtualenv
 dulwich==0.21.7
     # via poetry
+exceptiongroup==1.2.2 ; python_version < '3.11'
+    # via pytest
 fastjsonschema==2.20.0
     # via poetry
 filelock==3.15.4
@@ -47,6 +49,8 @@ filelock==3.15.4
     # via virtualenv
 idna==3.7
     # via requests
+importlib-metadata==8.2.0 ; python_version < '3.12'
+    # via keyring
 iniconfig==2.0.0
     # via pytest
 installer==0.7.0
@@ -127,13 +131,19 @@ setuptools==72.2.0
     # via pyinstaller-hooks-contrib
 shellingham==1.5.4
     # via poetry
+tomli==2.0.1 ; python_full_version <= '3.11.0a6' or python_version < '3.11'
+    # via build
+    # via coverage
+    # via mypy
+    # via poetry
+    # via pytest
 tomlkit==0.13.0
     # via poetry
 trove-classifiers==2024.7.2
     # via poetry
 typing-extensions==4.12.2
     # via mypy
-urllib3==2.2.2
+urllib3==1.26.19
     # via activitywatch
     # via dulwich
     # via requests
@@ -141,3 +151,5 @@ virtualenv==20.26.3
     # via poetry
 xattr==1.1.0 ; sys_platform == 'darwin'
     # via poetry
+zipp==3.20.0 ; python_version < '3.12'
+    # via importlib-metadata
