@@ -25,6 +25,12 @@ tasks:
     vars:
       CLOSE_STDIN: '{{if eq OS "windows"}}<nul{{else}}0<&-{{end}}'
     cmds:
+      - cmd: git submodule foreach --recursive git add .
+        silent: true
+        ignore_error: true
+      - cmd: git submodule foreach --recursive git clean -xfd {{.CLOSE_STDIN}}
+        silent: true
+        ignore_error: true
       - cmd: git add .
       - cmd: git clean -xfd {{.CLOSE_STDIN}}
         silent: true
@@ -42,11 +48,28 @@ tasks:
           cmd.exe /D /E:ON /C \
             start "taskfile-run" /D "{{joinPath .TASKFILE_DIR "bin"}}" "{{joinPath .TASKFILE_DIR .OUTPUT_EXE_PATH}}"
 
+  yarn-install:
+    sources:
+      - package.json
+      - aw-*/**/package.json
+    generates:
+      - yarn.lock
+      - .yarn/install-state.gz
+      - .yarn/unplugged/**/*
+    cmds:
+      - cmd: yarn install
+
+  yarn-build:
+    deps: [yarn-install]
+    aliases: [yb, ybuild, build-yarn]
+    cmds:
+      - cmd: yarn workspaces foreach --all run build --parallel
+
   build:
     cmds:
       - task: rust-cargo-build
       - task: python-build
-        
+
   make:
     deps: [python-venv]
     cmds:
@@ -56,11 +79,10 @@ tasks:
     sources:
       - pyproject.toml
     generates:
-      - ./.venv/rye-venv.json
-      - ./requirements.lock
-      - ./requirements-dev.lock
+      - ./.venv/pyvenv.cfg
+      - ./uv.lock
     cmds:
-      - cmd: rye sync
+      - cmd: uv sync
 
   python-build:
     deps: [python-venv, git-submodule-init]
@@ -71,14 +93,14 @@ tasks:
       - aw-*/**/requirements*.lock
       - aw-*/**/*.py
     generates:
-      - ./dist/activitywatch-*.tar.gz
+      - dist/activitywatch-*.tar.gz
     cmds:
-      - cmd: rye build
+      - cmd: uv build
 
   rust-setup:
     generates:
-      - ./target/taskfile-rust-upgrade.log
-    cmds: 
+      - target/taskfile-rust-upgrade.log
+    cmds:
       - cmd: rustup upgrade > ./target/taskfile-rust-upgrade.log
 
   rust-cargo-build:
@@ -86,14 +108,14 @@ tasks:
     aliases: [rust-build, build-rs, cargo-bld]
     silent: true
     sources:
-      - ./aw-*/**/*.rs
-      - ./aw-*/**/Cargo.toml
-      - ./aw-*/**/Cargo.lock
+      - aw-*/**/*.rs
+      - aw-*/**/Cargo.toml
+      - aw-*/**/Cargo.lock
     generates:
-      - ./target/.rustc_info.json
+      - target/.rustc_info.json
     cmds:
       - cmd: cargo build
-        
+
   deps-windows:
     status:
       - git --version
@@ -112,7 +134,7 @@ tasks:
             main/7zip \
             main/uutils-coreutils
 
-  git-submodule-init: 
+  git-submodule-init:
     sources:
       - .gitmodules
     status:
