@@ -7,11 +7,10 @@ authors = [
     { name = "Johan Bjäreholt", email = "johan@bjareho.lt" },
 ]
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 dependencies = [
-    "urllib3<2",
-    # "aw-core",
-    # "aw-client",
+    "aw-core",
+    "aw-client",
     # "aw-watcher-afk",
     # "aw-watcher-window",
     # "aw-server",
@@ -24,11 +23,17 @@ package = false
 [tool.uv.workspace]
 members = [
     # Not all converted yet
-    #"aw-client",
-    #"aw-core",
+    "aw-client",
+    "aw-core",
 ]
 
 [tool.uv.sources]
+aw-core = { workspace = true }
+aw-client = { workspace = true }
+#aw-watcher-afk = { path = "aw-watcher-afk" }
+#aw-watcher-window = { path = "aw-watcher-window" }
+#aw-server = { path = "aw-server" }
+#aw-qt = { path = "aw-qt" }
 
 [dependency-groups]
 dev = [
@@ -38,9 +43,3 @@ dev = [
     "pytest-benchmark>=4.0.0",
     "pytest-cov>=5.0.0",
 ]
-#aw-core = { path = "aw-core" }
-#aw-client = { path = "aw-client" }
-#aw-watcher-afk = { path = "aw-watcher-afk" }
-#aw-watcher-window = { path = "aw-watcher-window" }
-#aw-server = { path = "aw-server" }
-#aw-qt = { path = "aw-qt" }
