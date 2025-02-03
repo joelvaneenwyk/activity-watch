@@ -1,9 +1,9 @@
 [submodule "aw-core"]
 	path = aw-core
-	url = https://github.com/ActivityWatch/aw-core.git
+	url = https://github.com/joelvaneenwyk/aw-core.git
 [submodule "aw-client"]
 	path = aw-client
-	url = https://github.com/ActivityWatch/aw-client.git
+	url = https://github.com/joelvaneenwyk/aw-client.git
 [submodule "aw-server"]
 	path = aw-server
 	url = https://github.com/joelvaneenwyk/aw-server.git
@@ -21,7 +21,7 @@
 	url = https://github.com/ActivityWatch/aw-server-rust.git
 [submodule "aw-notify"]
 	path = aw-notify
-	url = https://github.com/ErikBjare/aw-notify.git
+	url = https://github.com/joelvaneenwyk/aw-notify.git
 [submodule "aw-watcher-input"]
 	path = aw-watcher-input
 	url = https://github.com/ActivityWatch/aw-watcher-input.git
