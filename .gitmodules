@@ -1,9 +1,11 @@
 [submodule "aw-core"]
 	path = aw-core
 	url = https://github.com/joelvaneenwyk/aw-core.git
+	branch = master
 [submodule "aw-client"]
 	path = aw-client
 	url = https://github.com/joelvaneenwyk/aw-client.git
+	branch = master
 [submodule "aw-server"]
 	path = aw-server
 	url = https://github.com/joelvaneenwyk/aw-server.git
@@ -13,6 +15,7 @@
 [submodule "aw-qt"]
 	path = aw-qt
 	url = https://github.com/joelvaneenwyk/aw-qt.git
+	branch = master
 [submodule "aw-watcher-window"]
 	path = aw-watcher-window
 	url = https://github.com/ActivityWatch/aw-watcher-window.git
@@ -22,6 +25,7 @@
 [submodule "aw-notify"]
 	path = aw-notify
 	url = https://github.com/joelvaneenwyk/aw-notify.git
+	branch = master
 [submodule "aw-watcher-input"]
 	path = aw-watcher-input
 	url = https://github.com/ActivityWatch/aw-watcher-input.git
