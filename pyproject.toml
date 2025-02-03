@@ -11,29 +11,28 @@ requires-python = ">=3.9"
 dependencies = [
     "aw-core",
     "aw-client",
-    # "aw-watcher-afk",
-    # "aw-watcher-window",
-    # "aw-server",
-    # "aw-qt",
+    "aw-server",
+    "aw-qt",
 ]
 
 [tool.uv]
-package = false
+package = true
+managed = true
+link-mode = "copy"
 
 [tool.uv.workspace]
 members = [
-    # Not all converted yet
-    "aw-client",
     "aw-core",
+    "aw-client",
+    "aw-server",
+    "aw-qt",
 ]
 
 [tool.uv.sources]
-aw-core = { workspace = true }
 aw-client = { workspace = true }
-#aw-watcher-afk = { path = "aw-watcher-afk" }
-#aw-watcher-window = { path = "aw-watcher-window" }
-#aw-server = { path = "aw-server" }
-#aw-qt = { path = "aw-qt" }
+aw-core = { workspace = true }
+aw-server = { workspace = true }
+aw-qt = { workspace = true }
 
 [dependency-groups]
 dev = [
