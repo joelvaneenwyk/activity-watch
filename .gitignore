@@ -31,3 +31,4 @@ __pycache__/
 # Added by cargo
 
 /target
+*.egg-info/
