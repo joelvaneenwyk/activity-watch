@@ -11,7 +11,6 @@
 </p>
 
 <p align="center">
-
   <a href="https://twitter.com/ActivityWatchIt">
     <img title="Twitter follow" src="https://img.shields.io/twitter/follow/ActivityWatchIt.svg?style=social&label=Follow"/>
   </a>
@@ -37,7 +36,6 @@
 </p>
 
 <p align="center">
-
   <a href="https://github.com/ActivityWatch/activitywatch/actions?query=branch%3Amaster">
     <img title="Build Status GitHub" src="https://github.com/ActivityWatch/activitywatch/workflows/Build/badge.svg?branch=master" />
   </a>
@@ -181,6 +179,46 @@ We have a plan to address all of these and we're well on our way. See the table 
 | WakaTime      | :x:                | :white_check_mark: | :white_check_mark: | :white_check_mark: | Only for text editors |
 
 For a complete list of the things ActivityWatch can track, [see the page on *watchers* in the documentation](https://docs.activitywatch.net/en/latest/watchers.html).
+
+
+## Architecture
+
+```mermaid
+graph TD;
+  aw-qt[<a href='https://github.com/ActivityWatch/aw-qt'>aw-qt</a>];
+  aw-notify[<a href='https://github.com/ActivityWatch/aw-notify'>aw-notify</a>];
+  aw-server[<a href='https://github.com/ActivityWatch/aw-server'>aw-server</a>];
+  aw-webui[<a href='https://github.com/ActivityWatch/aw-webui'>aw-webui</a>];
+  aw-watcher-window[<a href='https://github.com/ActivityWatch/aw-watcher-window'>aw-watcher-window</a>];
+  aw-watcher-afk[<a href='https://github.com/ActivityWatch/aw-watcher-afk'>aw-watcher-afk</a>];
+  aw-watcher-web[<a href='https://github.com/ActivityWatch/aw-watcher-web'>aw-watcher-web</a>];
+  aw-sync[<a href='https://github.com/ActivityWatch/aw-server-rust/tree/master/aw-sync'>aw-sync</a>];
+
+  aw-qt -- Manages --> aw-server;
+  aw-qt -- Manages --> aw-notify -- Queries --> aw-server;
+  aw-qt -- Manages --> aw-watcher-window -- Watches --> S1[Active window] -- Heartbeats --> aw-server;
+  aw-qt -- Manages --> aw-watcher-afk -- Watches --> S2[AFK status] -- Heartbeats --> aw-server;
+  Browser -- Manages --> aw-watcher-web -- Watches --> S3[Active tab] -- Heartbeats --> aw-server;
+  SF -- Dropbox/Syncthing/etc --> SF;
+  aw-server <-- Push/Pull --> aw-sync <-- Read/Write --> SF[Sync folder];
+  aw-server -- Serves --> aw-webui -- Queries --> aw-server;
+
+  %% User -- Interacts --> aw-webui;
+  %% User -- Observes --> aw-notify;
+  %% User -- Interacts --> aw-qt;
+
+classDef lightMode fill:#FFFFFF, stroke:#333333, color:#333333;
+classDef darkMode fill:#333333, stroke:#FFFFFF, color:#FFFFFF;
+
+classDef lightModeLinks stroke:#333333;
+classDef darkModeLinks stroke:#FFFFFF;
+
+class A,B,C,D,E,G lightMode;
+class A,B,C,D,E,G darkMode;
+
+%% linkStyle 0 stroke:#FF4136, stroke-width:2px;
+%% linkStyle 1 stroke:#1ABC9C, stroke-width:2px;
+```
 
 ## About this repository
 
